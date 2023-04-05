@@ -1,13 +1,11 @@
 package stackspringboot.fullstackbackend.controller;
 
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import stackspringboot.fullstackbackend.exception.UserNotFoundException;
 import stackspringboot.fullstackbackend.model.User;
 import stackspringboot.fullstackbackend.repository.UserRepository;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 @RestController
@@ -17,12 +15,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    //get all register
+    //Get all register
     @GetMapping("api/v1/users")
     List<User>getAllUsers(){
         return userRepository.findAll();
     }
 
+    //Get register by Id
     @GetMapping("api/v1/user/{id}")
     User getUserbyId(@PathVariable Long id){
         return userRepository.findById(id)
@@ -44,6 +43,7 @@ public class UserController {
             user.setName(newUser.getName());
             user.setUsername(newUser.getUsername());
             user.setEmail(newUser.getEmail());
+            user.setRol(newUser.getRol());
 
             return userRepository.save(user);
         }).orElseThrow(() ->new  UserNotFoundException(id));
