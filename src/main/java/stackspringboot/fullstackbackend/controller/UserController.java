@@ -30,13 +30,13 @@ public class UserController {
     }
 
     //Create new register
-    @PostMapping("api/v1/create")
+    @PostMapping("api/v1/user/create")
     User newUser(@RequestBody User newUser){
         return userRepository.save(newUser);
 
     }
 
-        @PutMapping("api/v1/user/{id}")
+    @PutMapping("api/v1/user/{id}")
     User updateUser(@RequestBody User newUser, @PathVariable Long id){
 
         return userRepository.findById(id)
